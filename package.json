@@ -1,0 +1,38 @@
+{
+  "name": "opencode-glm-status",
+  "version": "0.1.0",
+  "description": "OpenCode TUI plugin: GLM / Zhipu Coding Plan quota inline next to the prompt input bar (5h token window, MCP quota, reset time).",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "src"
+  ],
+  "main": "./src/server.ts",
+  "exports": {
+    ".": "./src/server.ts",
+    "./tui": "./src/index.tsx"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "tui",
+    "glm",
+    "zhipu",
+    "z.ai",
+    "bigmodel",
+    "coding-plan",
+    "quota",
+    "usage"
+  ],
+  "dependencies": {
+    "@opencode-ai/plugin": ">=1.16.0"
+  },
+  "peerDependencies": {
+    "solid-js": "1.9.x",
+    "@opentui/solid": "0.3.x"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  }
+}
