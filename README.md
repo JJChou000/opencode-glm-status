@@ -67,6 +67,15 @@ Show your Zhipu / GLM / Z.ai Coding Plan quota right next to the prompt input ba
 
 从 `tui.json` 移除 `"opencode-glm-status"` 并重启 opencode 即可。
 
+## 从源码构建 / Build from source
+
+```bash
+npm install
+bun run build   # 产出 dist/tui.js + dist/index.js（需 bun ≥ 1.3）
+```
+
+> 注意：npm 包入口是编译后的 `dist/*.js`（solid 编译产物），不要把 `exports` 改指向 `src/*.tsx`——opencode 的 Bun 运行时不转译 node_modules 内的 TSX，且 `@opentui/solid` 0.3.x 无 jsx-runtime 实现，直接发布源码会导致插件静默加载失败。
+
 ## License
 
 MIT

@@ -186,22 +186,19 @@ const tui: TuiPlugin = async (api: any) => {
           }
           const barWidth = 8
           const filled = () => Math.round(((remaining ?? 0) / 100) * barWidth)
+          const layout = s.error ? {} : { flexDirection: "row", gap: 1, paddingRight: 1 }
           return (
             <Show when={findProvider(api) || s.fetchedAt > 0}>
-              <box flexDirection="row" gap={1} paddingRight={1}>
+              <box {...layout}>
                 <Show
                   when={!s.error}
                   fallback={
-                    <text fg={theme()?.textMuted}>
-                      <span style={{ fg: theme()?.textMuted }}>GLM ?</span>
-                    </text>
+                    <text fg={theme()?.textMuted}>GLM ?</text>
                   }
                 >
                   <text fg={theme()?.textMuted}>GLM</text>
-                  <text>
-                    <span style={{ fg: color() }}>{"█".repeat(filled())}</span>
-                    <span style={{ fg: theme()?.textMuted }}>{"░".repeat(barWidth - filled())}</span>
-                  </text>
+                  <text fg={color()}>{"█".repeat(filled())}</text>
+                  <text fg={theme()?.textMuted}>{"░".repeat(barWidth - filled())}</text>
                   <text fg={color()}>{remaining != null ? `${remaining}%` : "?"}</text>
                   <Show when={s.reset}>
                     <text fg={theme()?.textMuted}>↻{s.reset}</text>
