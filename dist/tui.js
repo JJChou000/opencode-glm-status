@@ -1,6 +1,4 @@
 // @bun
-var __require = import.meta.require;
-
 // src/index.tsx
 import { createComponent as _$createComponent } from "@opentui/solid";
 import { insert as _$insert } from "@opentui/solid";
@@ -119,7 +117,6 @@ var tui = async (api) => {
       const data = json?.data ?? json;
       const limits = Array.isArray(data?.limits) ? data.limits : [];
       const tok = limits.find((l) => l?.type === "TOKENS_LIMIT");
-      const mcp = limits.find((l) => l?.type === "TIME_LIMIT");
       let reset;
       for (const key of RESET_KEYS) {
         if (data?.[key] != null) {
@@ -132,7 +129,6 @@ var tui = async (api) => {
       setStatus({
         pct: typeof tok?.percentage === "number" ? tok.percentage : undefined,
         reset,
-        mcpLeft: typeof mcp?.remaining === "number" ? mcp.remaining : undefined,
         level: typeof data?.level === "string" ? data.level : undefined,
         fetchedAt: now
       });
@@ -195,10 +191,10 @@ var tui = async (api) => {
                 },
                 get fallback() {
                   return (() => {
-                    var _el$12 = _$createElement("text");
-                    _$insertNode(_el$12, _$createTextNode(`GLM ?`));
-                    _$effect((_$p) => _$setProp(_el$12, "fg", theme()?.textMuted, _$p));
-                    return _el$12;
+                    var _el$10 = _$createElement("text");
+                    _$insertNode(_el$10, _$createTextNode(`GLM ?`));
+                    _$effect((_$p) => _$setProp(_el$10, "fg", theme()?.textMuted, _$p));
+                    return _el$10;
                   })();
                 },
                 get children() {
@@ -209,12 +205,12 @@ var tui = async (api) => {
                     return _el$2;
                   })(), (() => {
                     var _el$4 = _$createElement("text");
-                    _$insert(_el$4, () => "█".repeat(filled()));
+                    _$insert(_el$4, () => "\u2588".repeat(filled()));
                     _$effect((_$p) => _$setProp(_el$4, "fg", color(), _$p));
                     return _el$4;
                   })(), (() => {
                     var _el$5 = _$createElement("text");
-                    _$insert(_el$5, () => "░".repeat(barWidth - filled()));
+                    _$insert(_el$5, () => "\u2591".repeat(barWidth - filled()));
                     _$effect((_$p) => _$setProp(_el$5, "fg", theme()?.textMuted, _$p));
                     return _el$5;
                   })(), (() => {
@@ -227,7 +223,7 @@ var tui = async (api) => {
                       return s.reset;
                     },
                     get children() {
-                      var _el$7 = _$createElement("text"), _el$8 = _$createTextNode(`↻`);
+                      var _el$7 = _$createElement("text"), _el$8 = _$createTextNode(`\u21BB`);
                       _$insertNode(_el$7, _el$8);
                       _$insert(_el$7, () => s.reset, null);
                       _$effect((_$p) => _$setProp(_el$7, "fg", theme()?.textMuted, _$p));
@@ -235,26 +231,15 @@ var tui = async (api) => {
                     }
                   }), _$createComponent(Show, {
                     get when() {
-                      return s.mcpLeft != null;
-                    },
-                    get children() {
-                      var _el$9 = _$createElement("text"), _el$0 = _$createTextNode(`MCP `);
-                      _$insertNode(_el$9, _el$0);
-                      _$insert(_el$9, () => s.mcpLeft, null);
-                      _$effect((_$p) => _$setProp(_el$9, "fg", theme()?.textMuted, _$p));
-                      return _el$9;
-                    }
-                  }), _$createComponent(Show, {
-                    get when() {
                       return s.level;
                     },
                     get children() {
-                      var _el$1 = _$createElement("text"), _el$10 = _$createTextNode(`[`), _el$11 = _$createTextNode(`]`);
-                      _$insertNode(_el$1, _el$10);
-                      _$insertNode(_el$1, _el$11);
-                      _$insert(_el$1, () => s.level, _el$11);
-                      _$effect((_$p) => _$setProp(_el$1, "fg", theme()?.textMuted, _$p));
-                      return _el$1;
+                      var _el$9 = _$createElement("text"), _el$0 = _$createTextNode(`[`), _el$1 = _$createTextNode(`]`);
+                      _$insertNode(_el$9, _el$0);
+                      _$insertNode(_el$9, _el$1);
+                      _$insert(_el$9, () => s.level, _el$1);
+                      _$effect((_$p) => _$setProp(_el$9, "fg", theme()?.textMuted, _$p));
+                      return _el$9;
                     }
                   })];
                 }
@@ -266,7 +251,7 @@ var tui = async (api) => {
       }
     });
   } catch (e) {
-    console.error("[glm-status] slots.register 失败", e);
+    console.error("[glm-status] slots.register \u5931\u8D25", e);
   }
 };
 var src_default = {

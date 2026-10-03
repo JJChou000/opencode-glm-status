@@ -11,12 +11,11 @@ Show your Zhipu / GLM / Z.ai Coding Plan quota right next to the prompt input ba
 ## 效果预览 / Preview
 
 ```
-> 请输入你的问题…                                 GLM ████████░░ 69% ↻14:00 MCP 100 [lite]
+> 请输入你的问题…                                 GLM ████████░░ 69% ↻14:00 [lite]
 ```
 
 - `5h token`：5 小时滚动 token 窗口剩余比例（进度条，低额度变黄/红）
 - `↻14:00`：下一次配额重置时间
-- `MCP 100`：本月 MCP 工具调用剩余次数
 - `[lite]`：账号套餐等级
 
 每 30 秒自动刷新，并在每次回复完成时立即刷新。

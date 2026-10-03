@@ -1,7 +1,7 @@
 {
   "name": "opencode-glm-status",
-  "version": "0.2.0",
-  "description": "OpenCode TUI plugin: GLM / Zhipu Coding Plan quota inline next to the prompt input bar (5h token window, MCP quota, reset time).",
+  "version": "0.3.0",
+  "description": "OpenCode TUI plugin: GLM / Zhipu Coding Plan quota inline next to the prompt input bar (5h token window, reset time).",
   "license": "MIT",
   "type": "module",
   "files": [

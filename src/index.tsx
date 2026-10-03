@@ -91,7 +91,6 @@ function fmtReset(v: unknown): string | undefined {
 type Status = {
   pct?: number
   reset?: string
-  mcpLeft?: number
   level?: string
   error?: string
   fetchedAt: number
@@ -128,7 +127,6 @@ const tui: TuiPlugin = async (api: any) => {
       const data = json?.data ?? json
       const limits: any[] = Array.isArray(data?.limits) ? data.limits : []
       const tok = limits.find((l: any) => l?.type === "TOKENS_LIMIT")
-      const mcp = limits.find((l: any) => l?.type === "TIME_LIMIT")
       let reset: string | undefined
       for (const key of RESET_KEYS) {
         if (data?.[key] != null) {
@@ -140,7 +138,6 @@ const tui: TuiPlugin = async (api: any) => {
       setStatus({
         pct: typeof tok?.percentage === "number" ? tok.percentage : undefined,
         reset,
-        mcpLeft: typeof mcp?.remaining === "number" ? mcp.remaining : undefined,
         level: typeof data?.level === "string" ? data.level : undefined,
         fetchedAt: now,
       })
@@ -202,9 +199,6 @@ const tui: TuiPlugin = async (api: any) => {
                   <text fg={color()}>{remaining != null ? `${remaining}%` : "?"}</text>
                   <Show when={s.reset}>
                     <text fg={theme()?.textMuted}>↻{s.reset}</text>
-                  </Show>
-                  <Show when={s.mcpLeft != null}>
-                    <text fg={theme()?.textMuted}>MCP {s.mcpLeft}</text>
                   </Show>
                   <Show when={s.level}>
                     <text fg={theme()?.textMuted}>[{s.level}]</text>
