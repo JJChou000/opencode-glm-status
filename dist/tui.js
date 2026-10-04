@@ -129,7 +129,6 @@ var tui = async (api) => {
       setStatus({
         pct: typeof tok?.percentage === "number" ? tok.percentage : undefined,
         reset,
-        level: typeof data?.level === "string" ? data.level : undefined,
         fetchedAt: now
       });
     } catch (e) {
@@ -171,8 +170,6 @@ var tui = async (api) => {
               return t.warning;
             return t.error;
           };
-          const barWidth = 8;
-          const filled = () => Math.round((remaining ?? 0) / 100 * barWidth);
           const layout = s.error ? {} : {
             flexDirection: "row",
             gap: 1,
@@ -191,10 +188,10 @@ var tui = async (api) => {
                 },
                 get fallback() {
                   return (() => {
-                    var _el$10 = _$createElement("text");
-                    _$insertNode(_el$10, _$createTextNode(`GLM ?`));
-                    _$effect((_$p) => _$setProp(_el$10, "fg", theme()?.textMuted, _$p));
-                    return _el$10;
+                    var _el$7 = _$createElement("text");
+                    _$insertNode(_el$7, _$createTextNode(`GLM ?`));
+                    _$effect((_$p) => _$setProp(_el$7, "fg", theme()?.textMuted, _$p));
+                    return _el$7;
                   })();
                 },
                 get children() {
@@ -205,41 +202,19 @@ var tui = async (api) => {
                     return _el$2;
                   })(), (() => {
                     var _el$4 = _$createElement("text");
-                    _$insert(_el$4, () => "\u2588".repeat(filled()));
+                    _$insert(_el$4, remaining != null ? `${remaining}%` : "?");
                     _$effect((_$p) => _$setProp(_el$4, "fg", color(), _$p));
                     return _el$4;
-                  })(), (() => {
-                    var _el$5 = _$createElement("text");
-                    _$insert(_el$5, () => "\u2591".repeat(barWidth - filled()));
-                    _$effect((_$p) => _$setProp(_el$5, "fg", theme()?.textMuted, _$p));
-                    return _el$5;
-                  })(), (() => {
-                    var _el$6 = _$createElement("text");
-                    _$insert(_el$6, remaining != null ? `${remaining}%` : "?");
-                    _$effect((_$p) => _$setProp(_el$6, "fg", color(), _$p));
-                    return _el$6;
                   })(), _$createComponent(Show, {
                     get when() {
                       return s.reset;
                     },
                     get children() {
-                      var _el$7 = _$createElement("text"), _el$8 = _$createTextNode(`\u21BB`);
-                      _$insertNode(_el$7, _el$8);
-                      _$insert(_el$7, () => s.reset, null);
-                      _$effect((_$p) => _$setProp(_el$7, "fg", theme()?.textMuted, _$p));
-                      return _el$7;
-                    }
-                  }), _$createComponent(Show, {
-                    get when() {
-                      return s.level;
-                    },
-                    get children() {
-                      var _el$9 = _$createElement("text"), _el$0 = _$createTextNode(`[`), _el$1 = _$createTextNode(`]`);
-                      _$insertNode(_el$9, _el$0);
-                      _$insertNode(_el$9, _el$1);
-                      _$insert(_el$9, () => s.level, _el$1);
-                      _$effect((_$p) => _$setProp(_el$9, "fg", theme()?.textMuted, _$p));
-                      return _el$9;
+                      var _el$5 = _$createElement("text"), _el$6 = _$createTextNode(`\u21BB`);
+                      _$insertNode(_el$5, _el$6);
+                      _$insert(_el$5, () => s.reset, null);
+                      _$effect((_$p) => _$setProp(_el$5, "fg", theme()?.textMuted, _$p));
+                      return _el$5;
                     }
                   })];
                 }

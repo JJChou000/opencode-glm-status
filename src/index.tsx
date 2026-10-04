@@ -91,7 +91,6 @@ function fmtReset(v: unknown): string | undefined {
 type Status = {
   pct?: number
   reset?: string
-  level?: string
   error?: string
   fetchedAt: number
 }
@@ -138,7 +137,6 @@ const tui: TuiPlugin = async (api: any) => {
       setStatus({
         pct: typeof tok?.percentage === "number" ? tok.percentage : undefined,
         reset,
-        level: typeof data?.level === "string" ? data.level : undefined,
         fetchedAt: now,
       })
     } catch (e: any) {
@@ -181,8 +179,6 @@ const tui: TuiPlugin = async (api: any) => {
             if (remaining > 15) return t.warning
             return t.error
           }
-          const barWidth = 8
-          const filled = () => Math.round(((remaining ?? 0) / 100) * barWidth)
           const layout = s.error ? {} : { flexDirection: "row", gap: 1, paddingRight: 1 }
           return (
             <Show when={findProvider(api) || s.fetchedAt > 0}>
@@ -194,14 +190,9 @@ const tui: TuiPlugin = async (api: any) => {
                   }
                 >
                   <text fg={theme()?.textMuted}>GLM</text>
-                  <text fg={color()}>{"█".repeat(filled())}</text>
-                  <text fg={theme()?.textMuted}>{"░".repeat(barWidth - filled())}</text>
                   <text fg={color()}>{remaining != null ? `${remaining}%` : "?"}</text>
                   <Show when={s.reset}>
                     <text fg={theme()?.textMuted}>↻{s.reset}</text>
-                  </Show>
-                  <Show when={s.level}>
-                    <text fg={theme()?.textMuted}>[{s.level}]</text>
                   </Show>
                 </Show>
               </box>
